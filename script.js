@@ -142,7 +142,10 @@ $(document).ready(() => {
     if (this.id == "eventAse") tableDataShow(dateSort("ASED", "eventDate"));
   });
 });
-function initMap() {
+
+// map initiating
+function initMap(...arg) {
+  console.log(arg.length);
   const myLatLng = { lat: -25.363, lng: 131.044 };
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 0,
@@ -150,13 +153,12 @@ function initMap() {
   });
   let input = document.getElementById("searchTextField");
   new google.maps.places.Autocomplete(input);
-  const latLng = [];
-  rawData.forEach((item) => {
-    latLng.push({
-      lat: item.latitud,
-      lng: item.longitud,
-    });
-  });
+  let latLng = [];
+  if (arg.length < 1) {
+    latLng = lanLan(rawData);
+  } else {
+    latLng = lanLan(...arg);
+  }
   for (let i = 0; i < latLng.length; i++) {
     new google.maps.Marker({
       position: latLng[i],
@@ -168,7 +170,7 @@ function initMap() {
 
 // date sorting
 function dateSort(order, property) {
-  const sortArray = rawData.sort(function (a, b) {
+  const sortArray = rawData.sort((a, b) => {
     if (order == "ASED") return new Date(a[property]) - new Date(b[property]);
     else return new Date(b[property]) - new Date(a[property]);
   });
@@ -180,15 +182,26 @@ function filterData() {
   const inputFiter = $("#nameAndEvent").val();
   if (inputFiter === "" || inputFiter === null)
     return $("#nameAndEvent").focus();
-  tableDataShow(
-    rawData.filter(
-      (data) => data.name == inputFiter || data.eventName == inputFiter
-    )
+  const filterDatas = rawData.filter(
+    (data) => data.name == inputFiter || data.eventName == inputFiter
   );
+  tableDataShow(filterDatas);
+  initMap(filterDatas);
 }
-// filter set
+
+// filter reset
 function filterReset() {
   tableDataShow(rawData);
+}
+
+// filter lanLng
+function lanLan(data) {
+  return data.map((item) => {
+    return {
+      lat: item.latitud,
+      lng: item.longitud,
+    };
+  });
 }
 
 // function for desplay data
