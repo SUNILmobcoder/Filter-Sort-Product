@@ -120,7 +120,6 @@ const rawData = [{
     "latitud": 42.4353312,
     "eventName": "Micaela Wheway"
   }]
-  const latLng = [];
 // on page ready
 $(document).ready(() => {
     tableDataShow(rawData);
@@ -131,40 +130,28 @@ $(document).ready(() => {
         if(this.id == "eventDes") tableDataShow(dateSort("D", "eventDate"));
         if(this.id == "eventAse") tableDataShow(dateSort("ASED","eventDate"));
     })
-    
-    rawData.forEach(item => {
-        latLng.push({
-            lat:item.latitud,
-            lng: item.longitud
-        })
-    })
-
 });
 
 function initMap() {
     const myLatLng = { lat: -25.363, lng: 131.044 };
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: myLatLng,
+      zoom: 0,
+      center: myLatLng
     });
-    // for(let i=0; i< latLng.length; i++) {
-    //     let myLatLngs = latLng[i];
-    //     new google.maps.Marker({
-    //         position: myLatLngs,
-    //         map,
-    //         title: "Hello World!",
-    //       });
-    // }
-    // new google.maps.Marker({
-    //     position: myLatLng,
-    //     map,
-    //     title: "Hello World!",
-    //   });
-      new google.maps.Marker({
-        position: latLng[0],
-        map,
-        title: "Hello World!",
-      });
+      const latLng = [];
+      rawData.forEach(item => {
+        latLng.push({
+            lat:item.latitud,
+            lng: item.longitud
+        })
+    })
+    for(let i=0; i< latLng.length; i++) {
+        new google.maps.Marker({
+            position: latLng[i],
+            map,
+            title: latLng[i],
+          });
+    }
   }
 
 
@@ -184,7 +171,12 @@ const sortArray = rawData.sort(function(a,b){
 // filter data by name and event name
 function filterData() {
     const inputFiter = $("#nameAndEvent").val();
+    if(inputFiter === '' || inputFiter === null) return $("#nameAndEvent").focus();
     tableDataShow(rawData.filter(data => data.name == inputFiter || data.eventName == inputFiter));
+}
+// filter set
+function filterReset() {
+    tableDataShow(rawData)
 }
 
 
