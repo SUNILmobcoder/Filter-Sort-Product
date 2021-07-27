@@ -205,6 +205,7 @@ function filterData() {
 // filter reset
 function filterReset() {
     FILTERDATA = false;
+    initMap();
   tableDataShow(rawData);
 }
 
