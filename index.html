@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Filter and Google Map</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./script.js" type="text/javascript"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWE4S15cUZvARDKHvXxsHfA47uJ6YeBvQ&callback=initMap"></script>
+  </head>
+  <!-- AIzaSyBoACnrVOVurMsoEroAPkT_0EiZRfy9T6M -->
+  <body>
+    <div class="container">
+      <div class="map item">
+        Google Map
+        <div id="map"></div>
+      </div>
+      <div class="search item">
+        Search
+        <div class="filter">
+          <input type="text" name="nameAndEvent" id="nameAndEvent" />
+          <button onclick="filterData()">Search</button>
+        </div>
+      </div>
+      <div class="productList item">
+        product list
+        <table class="table" id="productTable">
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>State</th>
+            <th>City</th>
+            <th>
+              Booking Date
+              <button class="sortOrder" id="bookingDes">&#8593;</button
+              ><button class="sortOrder" id="bookingAse">&#8595;</button>
+            </th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Event Name</th>
+            <th>
+              Event Date<button class="sortOrder" id="eventDes">&#8593;</button
+              ><button class="sortOrder" id="eventAse">&#8595;</button>
+            </th>
+            <th>Latitud</th>
+            <th>Longitud</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+
