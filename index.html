@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <script src="./script.js" type="text/javascript"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWE4S15cUZvARDKHvXxsHfA47uJ6YeBvQ&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAWE4S15cUZvARDKHvXxsHfA47uJ6YeBvQ&callback=initMap"></script>
   </head>
   <!-- AIzaSyBoACnrVOVurMsoEroAPkT_0EiZRfy9T6M -->
   <body>
@@ -23,6 +23,7 @@
           <input type="text" name="nameAndEvent" id="nameAndEvent" />
           <button onclick="filterData()">Search</button>
           <button onclick="filterReset()">Reset</button>
+          <input id="searchTextField" type="text" size="50">
         </div>
       </div>
       <div class="productList item">
