@@ -131,6 +131,14 @@ const rawData = [
     eventName: "Micaela Wheway",
   },
 ];
+// globle variable
+var FILTERDATA = false;
+var UpdatedREFOFOBJECT = [];
+function filtersDataValue(value) {
+    FILTERDATA = true;
+    UpdatedREFOFOBJECT = value;
+}
+
 // on page ready
 $(document).ready(() => {
   tableDataShow(rawData);
@@ -170,7 +178,11 @@ function initMap(...arg) {
 
 // date sorting
 function dateSort(order, property) {
-  const sortArray = rawData.sort((a, b) => {
+    if(FILTERDATA)
+        data = UpdatedREFOFOBJECT;
+    else
+        data = rawData
+  const sortArray = data.sort((a, b) => {
     if (order == "ASED") return new Date(a[property]) - new Date(b[property]);
     else return new Date(b[property]) - new Date(a[property]);
   });
@@ -185,12 +197,14 @@ function filterData() {
   const filterDatas = rawData.filter(
     (data) => data.name == inputFiter || data.eventName == inputFiter
   );
+  filtersDataValue(filterDatas)
   tableDataShow(filterDatas);
   initMap(filterDatas);
 }
 
 // filter reset
 function filterReset() {
+    FILTERDATA = false;
   tableDataShow(rawData);
 }
 
