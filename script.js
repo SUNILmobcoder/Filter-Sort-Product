@@ -149,7 +149,7 @@ function initMap() {
         new google.maps.Marker({
             position: latLng[i],
             map,
-            title: latLng[i],
+            title: "hello",
           });
     }
   }
