@@ -149,14 +149,16 @@ $(document).ready(() => {
     if (this.id == "eventDes") tableDataShow(dateSort("D", "eventDate"));
     if (this.id == "eventAse") tableDataShow(dateSort("ASED", "eventDate"));
   });
+  // input event handeling
+  $("#nameAndEvent").on("keyup", filterData)
 });
 
 // map initiating
 function initMap(...arg) {
   console.log(arg.length);
-  const myLatLng = { lat: -25.363, lng: 131.044 };
+  const myLatLng = { lat: 54.222154, lng: 42.4353312 };
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 0,
+    zoom: 4,
     center: myLatLng,
   });
   let input = document.getElementById("searchTextField");
@@ -189,25 +191,31 @@ function dateSort(order, property) {
   return sortArray;
 }
 
+
+
 // filter data by name and event name
 function filterData() {
   const inputFiter = $("#nameAndEvent").val();
-  if (inputFiter === "" || inputFiter === null)
-    return $("#nameAndEvent").focus();
-  const filterDatas = rawData.filter(
-    (data) => data.name == inputFiter || data.eventName == inputFiter
+  // if (inputFiter === "" || inputFiter === null)
+  //   return $("#nameAndEvent").focus();
+  let filterDatas = rawData.filter(
+    (data) => data.name.startsWith(inputFiter) || data.eventName.startsWith(inputFiter)
   );
+  if(inputFiter.length < 1) {
+    filterDatas = rawData;
+  }
+    
   filtersDataValue(filterDatas)
   tableDataShow(filterDatas);
   initMap(filterDatas);
 }
 
-// filter reset
-function filterReset() {
-    FILTERDATA = false;
-    initMap();
-  tableDataShow(rawData);
-}
+// // filter reset
+// function filterReset() {
+//     FILTERDATA = false;
+//     initMap();
+//   tableDataShow(rawData);
+// }
 
 // filter lanLng
 function lanLan(data) {

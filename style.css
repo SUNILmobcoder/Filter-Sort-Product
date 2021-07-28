@@ -19,8 +19,13 @@
 }
 
 #map {
-    min-width: 800px;
+    min-width: 1200px;
     height: 400px;
+}
+
+input {
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .table {
